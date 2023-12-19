@@ -7,7 +7,6 @@
         "sourceMap": true,
         "esModuleInterop": true,
         "target": "es6",
-        // "noImplicityAny":true
     },
     "include": [
         "src/**/*"

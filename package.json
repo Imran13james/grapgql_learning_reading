@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@prisma/client": "^5.7.0",
     "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.19.5",
     "@types/compression": "^1.7.5",
@@ -28,8 +29,12 @@
     "graphql": "^16.8.1",
     "http": "^0.0.1-security",
     "mongoose": "^8.0.3",
-    "nodemon": "^3.0.2",
-    "ts-node": "^10.9.1",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "prisma": "^5.7.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
