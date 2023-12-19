@@ -1,24 +1,31 @@
 const express = require('express');
-const http = require('http');
-const cookieparser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const app = express();
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const iCreatedApploGQLSERVER = require('./graphql/index')
-const PORT = process.env.PORT || 4004; // Use process.env.PORT or a default value
+const { ApolloServer } = require('apollo-server-express');
+const iCreatedApploGQLSERVER = require('./graphql/index');
 
-async function Grapql() {
+const app = express();
+const PORT = process.env.PORT || 4004;
+
+async function Graphql() {
   app.use(cors({
-    credentials: true, // Fix: Change Credential to credentials
+    credentials: true,
   }));
-  app.use(cookieparser());
-  app.use(bodyParser.json()); // Fix: Use bodyParser.json() for JSON parsing
+  app.use(cookieParser());
+  app.use(bodyParser.json());
   app.use(compression());
-  const GrapqlSErver = await iCreatedApploGQLSERVER()
-  GrapqlSErver.applyMiddleware({ app, path: '/QL' }) // Use applyMiddleware method
+
+  const graphqlServer = await iCreatedApploGQLSERVER();
+
+  // Applying Apollo Server middleware to Express app
+  graphqlServer.applyMiddleware({ app, path: '/QL' });
+
+  // Starting the Express server
   app.listen(PORT, () => {
-    console.log(`app is listing on the port ${PORT}`)
-  })
+    console.log(`App is listening on port ${PORT}`);
+  });
 }
-Grapql()
+
+Graphql();

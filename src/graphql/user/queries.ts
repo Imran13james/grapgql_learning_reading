@@ -1,8 +1,4 @@
-const { typeDefs } = require("./typedef");
+export const Query = `#graphql
+    getCurrentUsers: [Book]!
+    getusers: [User]!`;
 
-export const Queries = `#graphql
-${typeDefs}
-  type Query {
-    getBooks:[Book]!
-}
-`;

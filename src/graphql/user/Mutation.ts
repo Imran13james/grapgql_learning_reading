@@ -1,3 +1,9 @@
-export const Mutation = `#graphql
-createUsers(firstName:String!,lastName:String,email:String!,password:String!,salt:String!):String
-`
+export const Mutation = `
+  createUsers(
+    name: String!,
+    email: String!,
+    password: String!,
+    id: String!,
+    salt: String!
+  ): Boolean!
+`;

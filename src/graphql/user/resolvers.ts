@@ -1,26 +1,25 @@
-// Assuming import of CreateUsersPayload from graphql/service/user
-const { CreateUsersPayload } = require("../service/user");
-const UserService = require("../service/user");
+const usersData = require('./return');
+const getusersData = require('./getUsers');
 
-const Query = {
-    getBooks: async () => {
+const resolvers = {
+    Query: {
+      getCurrentUsers: async () => {
         try {
-            return "hello world";
+          return usersData; // Assuming usersData is an iterable (e.g., an array of objects)
         } catch (error) {
-            throw new Error('Error fetching books');
+          throw new Error('Error fetching users');
         }
-    },
-};
-
-const Mutation = {
-    createUsers: async (_, { payload }) => {
+      },
+      getusers: async () => {
         try {
-            const result = await UserService.createUser(payload);
-            return result.id;
+          return getusersData; // Assuming usersData is an iterable (e.g., an array of objects)
         } catch (error) {
-            throw new Error('Error creating user');
+          throw new Error('Error fetching users');
         }
+      },
     },
-};
 
-module.exports = { Query, Mutation };
+  };
+  
+  module.exports = resolvers;
+  

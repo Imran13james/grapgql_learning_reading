@@ -1,25 +1,19 @@
 const { ApolloServer } = require("apollo-server-express");
-const { Users } = require("./user/index")
+const {Users} = require("./user/index")
+const resolvers = require("./user/resolvers"); // Import the resolvers
 async function iCreatedApploGQLSERVER() {
-  const resolvers = {
-    Query: {
-    //  ...Users.resolvers.Query
-    },
-    Mutation:{
-      ...Users.resolvers.Mutation
-    }
-  }
   try {
     const server = new ApolloServer({
-      typeDefs: `#graphql
+      typeDefs: `
+      ${Users.typeDefs}
       type Query {
-      hello:String
+      ${Users.Query}
       }
       type Mutation {
-        ${Users.Mutation.createUsers}
-      }
+        ${Users.Mutation}
+     }
       `,
-      resolvers,
+      resolvers
     });
     await server.start() 
     return server;

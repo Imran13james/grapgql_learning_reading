@@ -1,37 +1,38 @@
-const { pprismaClient } = require('./db');
-const { createHmac, randomBytes } = require('crypto');
-
-interface CreateUsersPayload {
-  firstName: string;
-  lastName?: string;
-  id: string;
-  password: string;
-  salt: string;
+const { pprismaClient } = require('./db')
+const { createHmac } = require('node:crypto')
+const { randomBytes } = require('node:crypto')
+ 
+export interface CreateUsersPalyod {
+    firstName: String
+    lastName?: String
+    id: String
+    password: String
+    email:String
+    salt: String
 }
+export interface getUserTokenpayload{
+    password: String
+    email:String
 
+}
 class UserService {
-  public static async createUser(payload: CreateUsersPayload) {
-    const { firstName, lastName, id, password, salt } = payload;
-    const newSalt = salt || randomBytes(32).toString('hex'); // Use provided salt or generate a new one
-
-    const hashedPassword = createHmac('sha256', newSalt).update(password).digest('hex');
-
-    try {
-      const createdUser = await pprismaClient.user.create({
-        data: {
-          firstName,
-          lastName,
-          id,
-          salt: newSalt,
-          password: hashedPassword,
-        },
-      });
-
-      return createdUser;
-    } catch (error) {
-      throw new Error(`Error creating user: ${error.message}`);
+    public static createUser(payload: CreateUsersPalyod) {
+        const { firstName, lastName, id, password, salt ,email} = payload
+        const salti = randomBytes(32).toString()
+        const hashedPass = createHmac('sha256', salti).update(password).digest('hex')
+        return pprismaClient.user.create({
+            data: {
+                firstName,
+                lastName,
+                email,
+                id,
+                salt,
+                password: hashedPass,
+            }
+        })
     }
-  }
-}
+    public static  getuserToken(payload:getUserTokenpayload){
+        const {email,password}= payload;
 
-module.exports = UserService;
+    }
+}
