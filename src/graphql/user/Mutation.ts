@@ -3,7 +3,7 @@ createUsers(
   name: String,
   email: String!,
   password: String!,
-  salt: String!
+  salt: String
 ): String
 `;
 

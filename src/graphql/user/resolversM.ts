@@ -10,7 +10,6 @@ const resolversM = {
           email,
           password,
           salt,
-
         },
       });
       return true;
