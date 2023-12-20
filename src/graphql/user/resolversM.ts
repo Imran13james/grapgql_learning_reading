@@ -3,13 +3,14 @@ const prisma = new PrismaClient();
 
 const resolversM = {
   Mutation: {
-    createUser: async (_, { name, email, password, id }) => {
-      await prisma.user.create({
+    createUser: async (_, { name, email, password,salt }) => {
+      await prisma.User.create({
         data: {
           name,
           email,
           password,
-          id,
+          salt,
+
         },
       });
       return true;

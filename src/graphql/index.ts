@@ -1,6 +1,6 @@
 const { ApolloServer } = require("apollo-server-express");
 const {Users} = require("./user/index")
-const resolvers = require("./user/resolvers"); // Import the resolvers
+const { queries, mutations } = require("./user/resolvers");
 async function iCreatedApploGQLSERVER() {
   try {
     const server = new ApolloServer({
@@ -13,12 +13,23 @@ async function iCreatedApploGQLSERVER() {
         ${Users.Mutation}
      }
       `,
-      resolvers
+      resolvers:{
+        Query:{
+              ...queries
+        },
+        Mutation:{
+          ...mutations
+         
+        }
+      }
+      
     });
+    // console.log('Apollo Server setup completed.');
     await server.start() 
+    // console.log('Apollo Server started.');
     return server;
   } catch (error) {
-    console.error("Failed to start server:", error);
+    // console.error("Failed to start server:", error);
   }
 }
 

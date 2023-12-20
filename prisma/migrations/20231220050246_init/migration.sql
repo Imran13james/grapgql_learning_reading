@@ -1,13 +1,13 @@
 -- CreateTable
-CREATE TABLE "schemaUsers" (
+CREATE TABLE "MyUsers" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" TEXT NOT NULL,
     "salt" TEXT NOT NULL,
 
-    CONSTRAINT "schemaUsers_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "MyUsers_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "schemaUsers_email_key" ON "schemaUsers"("email");
+CREATE UNIQUE INDEX "MyUsers_email_key" ON "MyUsers"("email");
